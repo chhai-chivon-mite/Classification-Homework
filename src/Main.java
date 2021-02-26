@@ -2,7 +2,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -16,15 +18,32 @@ public class Main {
 	public static double petalLength = 1.5;
 	public static double petalWidth = 2.8;
 	
+	
 	public static void main(String[] agrs) throws IOException {
-	    for(Flower f : getFlowsers()) {
-	    	System.out.println("Sepal Length => " + f.getSepalLength());
-	    	System.out.println("Sepal Width => " + f.getSepalWidth());
-	    	System.out.println("petal Length => " + f.getPetalLength());
-	    	System.out.println("petal Width => " + f.getPetalWidth());
-	    	System.out.println("class Name => " + f.getClassName());
-	    	System.out.println("======================================");
+		Map<Flower,Double> result = new HashMap<>();
+	    for(Flower f : getFlowsers()) {	    	
+	    	double distanceValue = calculateDistance(getInstance(),f);
+	    	System.out.println("Distance Value = " + distanceValue);
+	    	result.put(f, distanceValue);
 	    }
+	}
+	
+	private static Flower getInstance() {
+		Flower f = new Flower();
+		f.setSepalLength(sepalLength);
+		f.setSepalWidth(sepalWidth);
+		f.setPetalLength(petalLength);
+		f.setPetalWidth(petalWidth);
+		return f;
+	}
+	
+	private static double calculateDistance(Flower from, Flower to) {
+		 double distance = 0.0;
+	     distance += Math.pow(from.getSepalLength() - to.getSepalLength(), 2);
+	     distance += Math.pow(from.getSepalWidth() - to.getSepalWidth(), 2);
+	     distance += Math.pow(from.getPetalLength() - to.getPetalLength(), 2);
+	     distance += Math.pow(from.getPetalWidth() - to.getPetalWidth(), 2);
+	     return Math.sqrt(distance);
 	}
 	
 	public static List<Flower> getFlowsers() throws IOException{
@@ -40,7 +59,7 @@ public class Main {
 	    	f.setSepalWidth(Double.valueOf(objects[1]));
 	    	f.setPetalLength(Double.valueOf(objects[2]));
 	    	f.setPetalWidth(Double.valueOf(objects[3]));
-	    	f.setClassName(objects[4]);
+	    	f.setIrisClass(IrisClass.findByValue(objects[4]));
 	    	flowsers.add(f);
 	    }
 	    return flowsers;

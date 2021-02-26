@@ -17,7 +17,7 @@ public class Flower {
 	private double sepalWidth;
 	private double petalLength;
 	private double petalWidth;
-	private String className;
+	private IrisClass irisClass;
 	
 	public double getSepalLength() {
 		return sepalLength;
@@ -43,10 +43,11 @@ public class Flower {
 	public void setPetalWidth(double petalWidth) {
 		this.petalWidth = petalWidth;
 	}
-	public String getClassName() {
-		return className;
+	public IrisClass getIrisClass() {
+		return irisClass;
 	}
-	public void setClassName(String className) {
-		this.className = className;
+	public void setIrisClass(IrisClass irisClass) {
+		this.irisClass = irisClass;
 	}
+	
 }
