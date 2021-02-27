@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.Map.Entry;
 
 public class Main {
 	
@@ -23,9 +23,17 @@ public class Main {
 		Map<Flower,Double> result = new HashMap<>();
 	    for(Flower f : getFlowsers()) {	    	
 	    	double distanceValue = calculateDistance(getInstance(),f);
-	    	System.out.println("Distance Value = " + distanceValue);
 	    	result.put(f, distanceValue);
 	    }
+	    result = MapUtil.sortByValue(result);
+	    System.out.println("====================================");
+	    int index = 1;
+	    for(Entry<Flower, Double> entry : result.entrySet()) {
+	    	System.out.println("Class Name  = " + entry.getKey().getIrisClass().getValue());
+	    	System.out.println("Distance Value = " + entry.getValue());
+	    	if(index == 1) break;
+	    }
+	    System.out.println("====================================");
 	}
 	
 	private static Flower getInstance() {
